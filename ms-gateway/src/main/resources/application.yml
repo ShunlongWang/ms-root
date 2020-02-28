@@ -1,0 +1,19 @@
+server:
+  port: 80
+  servlet:
+    context-path: /
+
+spring:
+  profile:
+    active: dev
+  cloud:
+    gateway:
+      routes:
+        - id: order_route
+          uri: lb://ms-ordermanagement
+          predicates:
+            - Path= /order/**
+        - id: user_route
+          uri: lb://ms-usermanagement
+          predicates:
+            - Path= /user/**
